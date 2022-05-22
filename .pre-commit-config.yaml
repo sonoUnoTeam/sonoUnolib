@@ -1,0 +1,77 @@
+repos:
+- repo: https://github.com/asottile/pyupgrade
+  rev: "v2.32.1"
+  hooks:
+  - id: pyupgrade
+    args: ["--py39-plus"]
+
+- repo: https://github.com/hadialqattan/pycln
+  rev: "v1.3.2"
+  hooks:
+  - id: pycln
+    args:
+    - --all
+
+- repo: https://github.com/pre-commit/mirrors-isort
+  rev: 'v5.10.1'
+  hooks:
+  - id: isort
+    args:
+    - --profile black
+
+- repo: https://github.com/psf/black
+  rev: '22.3.0'
+  hooks:
+  - id: black
+    args:
+    - --skip-string-normalization
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: 'v4.2.0'
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-yaml
+  - id: check-added-large-files
+  - id: double-quote-string-fixer
+
+- repo: https://github.com/pycqa/flake8  # code
+  rev: '4.0.1'
+  hooks:
+  - id: flake8
+    name: flake 8 (src)
+    args:
+    - --max-line-length=88
+    # D106 missing docstring in public nested class
+    # D401 first line should be in imperative mood
+    # E203 whitespace before ':' (black incompatibility)
+    - --extend-ignore=D106,D401,E203
+    additional_dependencies:
+    - flake8-docstrings
+    files: ^sonounolib/
+
+- repo: https://github.com/pycqa/flake8  # tests
+  rev: '4.0.1'
+  hooks:
+  - id: flake8
+    name: flake 8 (tests)
+    args:
+    - --max-line-length=88
+    # E501 Line too long
+    - --extend-ignore=D, E501
+    additional_dependencies:
+    - flake8-docstrings
+    files: ^tests/
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: 'v0.950'
+  hooks:
+  - id: mypy
+    additional_dependencies:
+    - numpy
+    - pytest-stub
+    args:
+    - --strict
+    - --show-error-code
+    - --enable-error-code=ignore-without-code
+    language_version: python3.8
