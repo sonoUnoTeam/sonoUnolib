@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 import sounddevice as sd
 from numpy.testing import assert_array_almost_equal, assert_array_equal
+from pytest_mock import MockerFixture
 
 from sonounolib import Track
 
@@ -80,10 +81,13 @@ def test_get_data_cue_read_negative() -> None:
         track.get_data(cue_read=-1)
 
 
-def test_play() -> None:
+def test_play(mocker: MockerFixture) -> None:
     if sd.default.device[1] == -1:
-        pytest.skip('No output sound device available.')
+        mocker.patch('sounddevice.play')
     Track().add_sine_wave(440, 0.01).play()
+    if sd.default.device[1] == -1:
+        sd.play.assert_called_once()
+        pytest.skip('No output sound device available.')
 
 
 @pytest.mark.parametrize('n', [1, 2, 3])
