@@ -70,6 +70,7 @@ repos:
     additional_dependencies:
     - numpy
     - pytest-stub
+    - streamunolib
     args:
     - --strict
     - --show-error-code

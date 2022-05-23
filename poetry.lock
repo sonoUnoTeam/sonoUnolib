@@ -184,6 +184,17 @@ cffi = ">=1.0"
 numpy = ["numpy"]
 
 [[package]]
+name = "streamunolib"
+version = "0.4.0"
+description = "Library of generic transform components."
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.dependencies]
+typing-extensions = ">=4.2.0,<5.0.0"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -191,10 +202,18 @@ category = "dev"
 optional = false
 python-versions = ">=3.7"
 
+[[package]]
+name = "typing-extensions"
+version = "4.2.0"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "95c890ee73abdfee29ecf891ab6d6a2719608f5cd6bda14082689d1ac5852d51"
+content-hash = "9369a7012a892db9fb81a018ce610bfa1d2d0f949ce0b2ffd243728aaabb7e2d"
 
 [metadata.files]
 atomicwrites = [
@@ -374,7 +393,15 @@ soundfile = [
     {file = "SoundFile-0.10.3.post1-py2.py3.cp26.cp27.cp32.cp33.cp34.cp35.cp36.pp27.pp32.pp33-none-win_amd64.whl", hash = "sha256:b361d4ac1519a2e516cabafa6bf7e93492f999f35d7d25350cd87fdc3e5cb27e"},
     {file = "SoundFile-0.10.3.post1.tar.gz", hash = "sha256:490cff42650733d1832728b937fe99fa1802896f5ef4d61bcf78cf7ebecb107b"},
 ]
+streamunolib = [
+    {file = "streamunolib-0.4.0-py3-none-any.whl", hash = "sha256:036561a5065b370591150cc30ab7bdaeef6277b8dc5b7ea8b34d7732a25d5ab7"},
+    {file = "streamunolib-0.4.0.tar.gz", hash = "sha256:ad53098a93d1c013dd9116abce5adbe7196a06f220ce61174d6e3b966deb51bc"},
+]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+typing-extensions = [
+    {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},
+    {file = "typing_extensions-4.2.0.tar.gz", hash = "sha256:f1c24655a0da0d1b67f07e17a5e6b2a105894e6824b92096378bb3668ef02376"},
 ]
