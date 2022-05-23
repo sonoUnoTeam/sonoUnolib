@@ -51,6 +51,7 @@ pre-commits:
 unit-tests/3.8:
   <<: *unit-test
   image: python:3.8
+  coverage: '/^TOTAL.+?(\d+\%)$/'
 
 unit-tests/3.9:
   <<: *unit-test
