@@ -185,11 +185,11 @@ numpy = ["numpy"]
 
 [[package]]
 name = "streamunolib"
-version = "0.4.0"
+version = "0.4.3"
 description = "Library of generic transform components."
 category = "main"
 optional = false
-python-versions = ">=3.7,<4.0"
+python-versions = ">=3.8,<4.0"
 
 [package.dependencies]
 typing-extensions = ">=4.2.0,<5.0.0"
@@ -213,7 +213,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "9369a7012a892db9fb81a018ce610bfa1d2d0f949ce0b2ffd243728aaabb7e2d"
+content-hash = "43f3a8076e343727e34c0d20013d3be52a89498b68f141e0d234f66245360ae5"
 
 [metadata.files]
 atomicwrites = [
@@ -394,8 +394,8 @@ soundfile = [
     {file = "SoundFile-0.10.3.post1.tar.gz", hash = "sha256:490cff42650733d1832728b937fe99fa1802896f5ef4d61bcf78cf7ebecb107b"},
 ]
 streamunolib = [
-    {file = "streamunolib-0.4.0-py3-none-any.whl", hash = "sha256:036561a5065b370591150cc30ab7bdaeef6277b8dc5b7ea8b34d7732a25d5ab7"},
-    {file = "streamunolib-0.4.0.tar.gz", hash = "sha256:ad53098a93d1c013dd9116abce5adbe7196a06f220ce61174d6e3b966deb51bc"},
+    {file = "streamunolib-0.4.3-py3-none-any.whl", hash = "sha256:7a2a6f4769817e1b3bc73aecc7d2cb184d6c70b84c76e615f81491e55a14faea"},
+    {file = "streamunolib-0.4.3.tar.gz", hash = "sha256:753fa97dcf30725fb6971b225209e7e5569d1c7dd60d297a27a284d2c26bee85"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
