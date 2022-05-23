@@ -2,7 +2,7 @@
 
 This library provides sonification components to construct transforms.
 """
-from importlib.metadata import version
+# from importlib.metadata import version
 
 from .notes import asfrequency
 from .tracks import Track
@@ -12,4 +12,4 @@ __all__ = [
     'asfrequency',
 ]
 
-__version__ = version('sonounolib')
+# __version__ = version('sonounolib')

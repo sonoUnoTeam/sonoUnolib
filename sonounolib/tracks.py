@@ -236,7 +236,7 @@ class Track:
 
     def add_sine_wave(
         self,
-        frequency: float,
+        frequency: float | str,
         duration: float,
         amplitude: float = 1 / 4,
     ) -> Track:
