@@ -188,6 +188,27 @@ class Track:
             data = pad_along_axis(data, overflow)
         return data
 
+    def repeat(self, n: int) -> Track:
+        """Repeats the sound waves by the specified number of times.
+
+        Arguments:
+            n: The number of repeats. The value of 1 means no repetitions, i.e.
+                the track is not affected.
+
+        Raises:
+            ValueError: When the number of repeats is less than one.
+
+        Returns:
+            The current track, with its data repeated `n` times.
+        """
+        if n < 1:
+            raise ValueError(f'The number of repeats is less than one: {n!r}.')
+        if n == 1:
+            return self
+        data = np.tile(self.get_data(), n - 1)
+        self.set_cue_write(self.duration)
+        return self.add_raw_data(data)
+
     def add_blank(self, duration: float) -> Track:
         """Adds a blank to the track.
 

@@ -86,6 +86,30 @@ def test_play() -> None:
     Track().add_sine_wave(440, 0.01).play()
 
 
+@pytest.mark.parametrize('n', [1, 2, 3])
+def test_repeat(n: int) -> None:
+    track = Track().add_sine_wave(440, 1)
+    data = track.get_data()
+    size = data.shape[-1]
+    track.repeat(n)
+    new_data = track.get_data()
+    assert new_data.shape[-1] == n * data.shape[-1]
+    for i in range(n):
+        assert_array_equal(new_data[..., i * size : (i + 1) * size], data)  # noqa: E203
+
+
+@pytest.mark.parametrize('n', [1, 2, 3])
+def test_repeat_empty(n: int) -> None:
+    track = Track().repeat(n)
+    assert track.shape[-1] == 0
+
+
+@pytest.mark.parametrize('n', [-1, 0])
+def test_repeat_invalid(n: int) -> None:
+    with pytest.raises(ValueError, match='The number of repeats is less than one'):
+        Track().repeat(n)
+
+
 def test_add_track_extend() -> None:
     sound = Track(rate=2)
     sound._data = np.array([1.0, -1])
