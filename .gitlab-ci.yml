@@ -1,0 +1,61 @@
+variables:
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache/pip"
+
+cache:
+  key: "${CI_JOB_NAME}"
+  paths:
+    - .cache/pip
+    - .venv
+
+stages:
+  - quality
+  - tests
+
+
+# Jobs templates
+# --------------
+
+.quality-template: &quality
+  stage: quality
+  interruptible: true
+  image: python:3.8
+  before_script:
+    - pip install pre-commit
+    - pre-commit install
+
+.unit-test-template: &unit-test
+  stage: tests
+  interruptible: true
+  coverage: '/TOTAL.*\s(\d+\.\d+\%)/'
+  before_script:
+    - apt update
+    - apt install -y libsndfile1-dev libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+    - pip install poetry sndfile
+    - poetry --version
+    - poetry config virtualenvs.in-project true
+    - poetry install -vv
+  script: poetry run pytest --showlocals
+
+
+# Quality jobs
+# ------------
+
+pre-commits:
+  <<: *quality
+  script: pre-commit run --all-files
+
+
+# Unit tests jobs
+# ---------------
+
+unit-tests/3.8:
+  <<: *unit-test
+  image: python:3.8
+
+unit-tests/3.9:
+  <<: *unit-test
+  image: python:3.9
+
+unit-tests/3.10:
+  <<: *unit-test
+  image: python:3.10

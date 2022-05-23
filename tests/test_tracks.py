@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
+import sounddevice as sd
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 from sonounolib import Track
@@ -80,6 +81,8 @@ def test_get_data_cue_read_negative() -> None:
 
 
 def test_play() -> None:
+    if sd.default.device[1] == -1:
+        pytest.skip('No output sound device available.')
     Track().add_sine_wave(440, 0.01).play()
 
 
