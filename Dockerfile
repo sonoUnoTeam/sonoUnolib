@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 RUN adduser --disabled-password --gecos '' sonounolib
 
 # Install the PortAudio dependencies
-RUN apt-get update && apt-get install -y curl libsndfile1-dev libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+RUN apt-get update && apt-get install -y curl libportaudio2 libsndfile1
 
 WORKDIR /code/
 
@@ -25,7 +25,8 @@ COPY ./pyproject.toml ./poetry.lock* /code/
 RUN poetry install --no-root
 
 # Add Python dependencies
-RUN bash -c "poetry run pip install jupyterlab"
+RUN poetry run pip install --upgrade pip
+RUN poetry run pip install --root-user-action=ignore jupyterlab
 
 # copy application files
 COPY . /code

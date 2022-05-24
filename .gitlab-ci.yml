@@ -28,9 +28,9 @@ stages:
   interruptible: true
   coverage: '/TOTAL.*\s(\d+\.\d+\%)/'
   before_script:
-    - apt update
-    - apt install -y libsndfile1-dev libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
-    - pip install poetry sndfile
+    - apt-get update
+    - apt-get install -y libsndfile1
+    - pip install poetry
     - poetry --version
     - poetry config virtualenvs.in-project true
     - poetry install -vv
@@ -60,3 +60,14 @@ unit-tests/3.9:
 unit-tests/3.10:
   <<: *unit-test
   image: python:3.10
+
+unit-tests/with PortAudio:
+  <<: *unit-test
+  image: python:3.8
+  before_script:
+    - apt-get update
+    - apt-get install -y libportaudio2 libsndfile1
+    - pip install poetry
+    - poetry --version
+    - poetry config virtualenvs.in-project true
+    - poetry install -vv
