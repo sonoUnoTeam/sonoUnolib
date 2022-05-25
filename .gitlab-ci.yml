@@ -4,12 +4,12 @@ variables:
 cache:
   key: "${CI_JOB_NAME}"
   paths:
-    - .cache/pip
-    - .venv
+  - .cache/pip
+  - .venv
 
 stages:
-  - quality
-  - tests
+- quality
+- tests
 
 
 # Jobs templates
@@ -20,20 +20,20 @@ stages:
   interruptible: true
   image: python:3.8
   before_script:
-    - pip install pre-commit
-    - pre-commit install
+  - pip install pre-commit
+  - pre-commit install
 
 .unit-test-template: &unit-test
   stage: tests
   interruptible: true
   coverage: '/TOTAL.*\s(\d+\.\d+\%)/'
   before_script:
-    - apt-get update
-    - apt-get install -y libsndfile1
-    - pip install poetry
-    - poetry --version
-    - poetry config virtualenvs.in-project true
-    - poetry install -vv
+  - apt-get update
+  - apt-get install -y libsndfile1
+  - pip install poetry
+  - poetry --version
+  - poetry config virtualenvs.in-project true
+  - poetry install -vv
   script: poetry run pytest --showlocals
 
 
@@ -65,9 +65,9 @@ unit-tests/with PortAudio:
   <<: *unit-test
   image: python:3.8
   before_script:
-    - apt-get update
-    - apt-get install -y libportaudio2 libsndfile1
-    - pip install poetry
-    - poetry --version
-    - poetry config virtualenvs.in-project true
-    - poetry install -vv
+  - apt-get update
+  - apt-get install -y libportaudio2 libsndfile1
+  - pip install poetry
+  - poetry --version
+  - poetry config virtualenvs.in-project true
+  - poetry install -vv
