@@ -23,7 +23,7 @@ def test_write_to_wav(max_amplitude: float, file_type: type, format: str) -> Non
         if isinstance(f, BytesIO):
             f.seek(0)
 
-        track_out = Track.from_wav(f, max_amplitude=max_amplitude)
+        track_out = Track.load(f, max_amplitude=max_amplitude)
 
     assert track_in.rate == track_out.rate
     assert track_in.max_amplitude == track_out.max_amplitude

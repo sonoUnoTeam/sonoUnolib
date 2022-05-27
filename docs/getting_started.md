@@ -12,7 +12,7 @@ Wave files can be imported as a `Track`:
 
 ```python
 from sonounolib import Track
-sound = Track.from_wav('glass-water.wav')
+sound = Track.load('glass-water.wav')
 sound.play()
 ```
 

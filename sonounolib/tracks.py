@@ -140,7 +140,7 @@ class Track:
         sd.play(data, self.rate)
 
     @classmethod
-    def from_wav(
+    def load(
         cls,
         file: str | Path | BinaryIO,
         max_amplitude: float = 1,
