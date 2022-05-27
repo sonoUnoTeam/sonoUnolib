@@ -3,9 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 from numpy.testing import assert_array_almost_equal, assert_array_equal
-from pytest_mock import MockerFixture
 
-import sonounolib
 from sonounolib import Track
 
 
@@ -79,33 +77,6 @@ def test_get_data_cue_read_negative() -> None:
     track = Track()
     with pytest.raises(ValueError, match='Negative cue read value'):
         track.get_data(cue_read=-1)
-
-
-def test_play(mocker: MockerFixture) -> None:
-    track = Track().add_sine_wave(440, 0.01)
-    if sonounolib.tracks.sd is None or sonounolib.tracks.sd.default.device[1] == -1:  # type: ignore[attr-defined]
-        patched_sd = mocker.patch('sonounolib.tracks.sd')
-        patched_sd.default.device = (1, 1)
-        track.play()
-        sonounolib.tracks.sd.play.assert_called_once()  # type: ignore[attr-defined]
-    else:
-        track.play()
-
-
-def test_play_no_portaudio(mocker: MockerFixture) -> None:
-    mocker.patch('sonounolib.tracks.sd', None)
-    with pytest.raises(OSError, match='Check if the PortAudio'):
-        Track().add_sine_wave(440, 0.01).play()
-
-
-def test_play_no_device(mocker: MockerFixture) -> None:
-    if sonounolib.tracks.sd is None:  # type: ignore[attr-defined]
-        patched_sd = mocker.patch('sonounolib.tracks.sd')
-        patched_sd.default.device = (-1, -1)
-    else:
-        mocker.patch.object(sonounolib.tracks.sd.default, 'device', (-1, -1))  # type: ignore[attr-defined]
-    with pytest.raises(OSError, match='There is no output device available'):
-        Track().add_sine_wave(440, 0.01).play()
 
 
 @pytest.mark.parametrize('n', [1, 2, 3])

@@ -5,24 +5,16 @@ using the sonoUno library.
 """
 from __future__ import annotations
 
-import warnings
 from pathlib import Path
-from typing import BinaryIO, Literal
+from typing import Any, BinaryIO, Literal
 
 import numpy as np
 import soundfile as sf
 from numpy.typing import ArrayLike, NDArray
 
 from .notes import asfrequency
+from .players import get_player
 from .utils import asmax_amplitude, pad_along_axis
-
-try:
-    import sounddevice as sd
-except OSError as exc:  # pragma: no cover
-    with warnings.catch_warnings():
-        warnings.simplefilter('always')
-        warnings.warn(str(exc), ImportWarning)
-    sd = None
 
 __all__ = ['Track']
 
@@ -111,7 +103,7 @@ class Track:
         self._index_write = round(value * self.rate)
         return self
 
-    def play(self, cue_read: float = 0, duration: float | None = None) -> None:
+    def play(self, cue_read: float = 0, duration: float | None = None) -> Any:
         """Plays the audio track.
 
         Arguments:
@@ -127,17 +119,10 @@ class Track:
             >>> track = Track().add_sine_wave(440, duration=1)
             >>> track.play()
         """
-        if sd is None:
-            raise OSError(
-                'The sounddevice package could not be imported. Check if the PortAudio '
-                'library is installed.'
-            )
-        if sd.default.device[1] == -1:
-            raise OSError('There is no output device available.')
-
+        player = get_player()
         data = self.get_data(cue_read=cue_read, duration=duration)
         data /= self.max_amplitude
-        sd.play(data, self.rate)
+        return player.play(data, self.rate)
 
     @classmethod
     def load(

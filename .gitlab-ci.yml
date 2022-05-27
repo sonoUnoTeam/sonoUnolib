@@ -32,12 +32,13 @@ stages:
   coverage: '/TOTAL.*\s(\d+\.\d+\%)/'
   before_script:
   - apt-get update
-  - apt-get install -y libsndfile1
+  - apt-get install -y libportaudio2 libsndfile1
   - pip install poetry
   - poetry --version
   - poetry config virtualenvs.in-project true
   - poetry install -vv
-  script: poetry run pytest --showlocals
+  script:
+  - poetry run pytest --showlocals
 
 
 # Quality jobs
@@ -64,15 +65,16 @@ unit-tests/3.10:
   <<: *unit-test
   image: python:3.10
 
-unit-tests/with PortAudio:
+unit-tests/missing backends:
   <<: *unit-test
-  before_script:
-  - apt-get update
-  - apt-get install -y libportaudio2 libsndfile1
-  - pip install poetry
-  - poetry --version
-  - poetry config virtualenvs.in-project true
-  - poetry install -vv
+  script:
+  # no ipython
+  - poetry run pip uninstall --yes ipython
+  - poetry run pytest --showlocals
+
+  # no Port Audio backend
+  - apt-get remove -y libportaudio2
+  - poetry run pytest --showlocals
 
 pages:
   stage: deploy

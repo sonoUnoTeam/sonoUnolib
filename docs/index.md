@@ -4,8 +4,7 @@ The sonoUno library provides tools to sonify scientific data. It provides generi
 
 ## Installation
 
-To use the library to play sounds, it is required to install the cross-platform [PortAudio](http://www.portaudio.com
-) dependencies. To read or write files, the cross-platform library [Libsndfile](http://www.mega-nerd.com/libsndfile) is required. For example, on a debian or ubuntu OS, the following packages need to be installed:
+If used in a Jupyter notebook, the library do not require an external library to play sounds. Otherwise, the cross-platform [PortAudio](http://www.portaudio.com) is needed. To read or write files, the cross-platform library [Libsndfile](http://www.mega-nerd.com/libsndfile) is required. For example, on a debian or ubuntu OS, the following packages need to be installed:
 ```bash
 $ apt update
 $ apt install -y libportaudio2 libsndfile1
@@ -16,10 +15,6 @@ $ pip install sonounolib
 ```
 
 ## Demo
-
-!!! note
-    The output sound through a dockerized Jupyter notebook on linux can be very glitchy.
-    We are investigating this issue.
 
 On linux, the library can be tried using a dockerized Jupyter notebook.
 

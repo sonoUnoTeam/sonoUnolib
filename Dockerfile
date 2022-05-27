@@ -22,7 +22,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/inst
 COPY ./pyproject.toml ./poetry.lock* /code/
 
 # Allow installing dev dependencies to run tests
-RUN poetry install --no-root
+RUN poetry install --no-root --without dev
 
 # Add Python dependencies
 RUN poetry run pip install --upgrade pip

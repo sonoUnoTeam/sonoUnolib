@@ -68,9 +68,10 @@ repos:
   hooks:
   - id: mypy
     additional_dependencies:
+    - IPython
     - pytest_mock
-    - numpy
     - pytest-stub
+    - numpy
     - streamunolib
     args:
     - --strict
