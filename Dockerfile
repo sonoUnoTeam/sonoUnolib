@@ -34,8 +34,8 @@ COPY . /code
 #USER sonounolib
 ENTRYPOINT ["poetry", "run", "jupyter", "lab", \
   "--ip=0.0.0.0", "--allow-root", \
-  "--NotebookApp.custom_display_url=http://127.0.0.1:8888", \
-  "--NotebookApp.root_dir=./notebooks" \
+  "--ServerApp.custom_display_url=http://127.0.0.1:8888", \
+  "--ServerApp.root_dir=./notebooks" \
 ]
 
 ENV PYTHONPATH=/code
