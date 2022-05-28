@@ -11,9 +11,9 @@ cache:
   - .venv
 
 stages:
-- deploy
 - quality
 - tests
+- deploy
 
 
 # Jobs templates

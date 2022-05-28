@@ -1,33 +1,31 @@
 """Provides an appropriate audio player according to current environment."""
 from __future__ import annotations
 
+import sys
 import warnings
 from abc import ABC, abstractmethod
+from types import ModuleType
 from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
 
-try:
-    import IPython
+IPython = sys.modules.get('IPython')
+sounddevice: ModuleType | None = None
 
-    sounddevice = None
-except ImportError:
+if IPython is not None and (
+    not IPython.get_ipython()
+    or IPython.get_ipython().__class__.__name__ == 'TerminalInteractiveShell'
+):  # pragma: no cover
     IPython = None
-    with warnings.catch_warnings():
-        warnings.simplefilter('always')
-        warnings.warn(
-            'IPython is not installed, falling back to sounddevice',
-            ImportWarning,
-        )
 
-        try:
-            import sounddevice  # type: ignore[no-redef]
-        except OSError as exc:
-            with warnings.catch_warnings():
-                warnings.simplefilter('always')
-                warnings.warn(str(exc), ImportWarning)
-            sounddevice = None
+if IPython is None:  # pragma: no cover
+    try:
+        import sounddevice  # type: ignore[no-redef]
+    except OSError as exc:
+        with warnings.catch_warnings():
+            warnings.simplefilter('always')
+            warnings.warn(str(exc), ImportWarning)
 
 
 class Player(ABC):
@@ -46,7 +44,7 @@ class Player(ABC):
 class IPythonPlayer(Player):
     """An audio player using IPython as backend."""
 
-    def play(self, data: NDArray[np.float64], rate: float) -> IPython.display.Audio:
+    def play(self, data: NDArray[np.float64], rate: float) -> Any:
         """Plays the requested audio waves using IPython audio.
 
         Arguments:
