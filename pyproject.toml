@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "sonounolib"
-version = "0.4.0"
+version = "0.4.1"
 description = "Library of generic sonification components."
 authors = ["Pierre Chanial <pierre.chanial@apc.in2p3.fr>", "Johanna Casado <johi@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-numpy = "^1.22.4"
+numpy = "^1.22.3"
 sounddevice = "^0.4.4"
 streamunolib = "^0.4.3"
 
