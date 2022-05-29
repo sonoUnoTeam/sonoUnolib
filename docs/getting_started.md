@@ -43,7 +43,7 @@ track = Track()
 for octave, frequency in frequencies.items():
     starting_time = octave
     duration = len(frequencies) - octave + 1
-    track.set_cue_write(starting_time).add_sine_wave(frequency, duration)
+    track.set_cue_write(starting_time).add_sine_wave(frequency, duration, amplitude=1/8)
 track.play()
 ```
 

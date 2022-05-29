@@ -506,20 +506,6 @@ CFFI = ">=1.0"
 numpy = ["numpy"]
 
 [[package]]
-name = "soundfile"
-version = "0.10.3.post1"
-description = "An audio library based on libsndfile, CFFI and NumPy"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-cffi = ">=1.0"
-
-[package.extras]
-numpy = ["numpy"]
-
-[[package]]
 name = "stack-data"
 version = "0.2.0"
 description = "Extract data from python stack frames and tracebacks for informative displays"
@@ -607,7 +593,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a346542b449ae47a54cb4582db821e38f0b9ab49a6c0cf7f0efe0886b1662592"
+content-hash = "92bfe780f52e0d85aa7bcbde5cdb104c45efe2a14d326abdeb1af7cfb4751ff3"
 
 [metadata.files]
 appnope = [
@@ -960,13 +946,6 @@ sounddevice = [
     {file = "sounddevice-0.4.4-py3-none-win32.whl", hash = "sha256:6907cd03ff93afa5a1c8851b8d4dd361bc15e0edefba4d5c5b46bf09b4979709"},
     {file = "sounddevice-0.4.4-py3-none-win_amd64.whl", hash = "sha256:6cad07e0e9212448a8573f9777abd94b656597d03c14caec4952e97b99d7dbd9"},
     {file = "sounddevice-0.4.4.tar.gz", hash = "sha256:f690f5aa418a56268c7bdbc97d697c85add0134c5c79d44b8a2ad7a1b85da789"},
-]
-soundfile = [
-    {file = "SoundFile-0.10.3.post1-py2.py3-none-any.whl", hash = "sha256:2d17e0a6fc2af0d6c1d868bafa5ec80aae6e186a97fec8db07ad6af29842fbc7"},
-    {file = "SoundFile-0.10.3.post1-py2.py3.cp26.cp27.cp32.cp33.cp34.cp35.cp36.pp27.pp32.pp33-none-macosx_10_5_x86_64.macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.whl", hash = "sha256:5e342ee293b896d31da67617fe65d0bdca217af193991b0cb6052353b1e0e506"},
-    {file = "SoundFile-0.10.3.post1-py2.py3.cp26.cp27.cp32.cp33.cp34.cp35.cp36.pp27.pp32.pp33-none-win32.whl", hash = "sha256:4555438c2c4f02b39fea2ed40f6ddeda88a80cd1ee9dd129be4d5f5134698cc2"},
-    {file = "SoundFile-0.10.3.post1-py2.py3.cp26.cp27.cp32.cp33.cp34.cp35.cp36.pp27.pp32.pp33-none-win_amd64.whl", hash = "sha256:b361d4ac1519a2e516cabafa6bf7e93492f999f35d7d25350cd87fdc3e5cb27e"},
-    {file = "SoundFile-0.10.3.post1.tar.gz", hash = "sha256:490cff42650733d1832728b937fe99fa1802896f5ef4d61bcf78cf7ebecb107b"},
 ]
 stack-data = [
     {file = "stack_data-0.2.0-py3-none-any.whl", hash = "sha256:999762f9c3132308789affa03e9271bbbe947bf78311851f4d485d8402ed858e"},

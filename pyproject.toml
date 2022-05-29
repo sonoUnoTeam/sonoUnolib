@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sonounolib"
-version = "0.3.0"
+version = "0.4.0"
 description = "Library of generic sonification components."
 authors = ["Pierre Chanial <pierre.chanial@apc.in2p3.fr>", "Johanna Casado <johi@gmail.com>"]
 
@@ -8,7 +8,6 @@ authors = ["Pierre Chanial <pierre.chanial@apc.in2p3.fr>", "Johanna Casado <johi
 python = "^3.8"
 numpy = "^1.22.4"
 sounddevice = "^0.4.4"
-SoundFile = "^0.10.3"
 streamunolib = "^0.4.3"
 
 [tool.poetry.dev-dependencies]
@@ -28,6 +27,9 @@ exclude_lines = [
     "raise NotImplementedError",
     "except ImportError:",
 ]
+omit = [
+    "sonounolib/extern/*"
+]
 show_missing = true
 skip_covered = true
 
@@ -41,10 +43,15 @@ plugins = "numpy.typing.mypy_plugin"
 module = [
     "IPython",
     "IPython.display",
-    "soundfile",
     "sounddevice",
 ]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "sonounolib.extern.*",
+]
+ignore_errors = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"

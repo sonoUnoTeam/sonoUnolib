@@ -9,9 +9,9 @@ from pathlib import Path
 from typing import Any, BinaryIO, Literal
 
 import numpy as np
-import soundfile as sf
 from numpy.typing import ArrayLike, NDArray
 
+from .extern import wavfile
 from .notes import asfrequency
 from .players import get_player
 from .utils import asmax_amplitude, pad_along_axis
@@ -136,7 +136,7 @@ class Track:
            file: The file to read from.
            max_amplitude: The max amplitude of the returned sound waves.
         """
-        data, rate = sf.read(file)
+        rate, data = wavfile.read(file)  # type: ignore[no-untyped-call]
         max_amplitude_in = asmax_amplitude(data.dtype.name)
         data = data.T.astype(float) * (max_amplitude / max_amplitude_in)
         track = Track(rate=rate, max_amplitude=max_amplitude)
@@ -159,7 +159,7 @@ class Track:
         required_max_amplitude = asmax_amplitude(format)
         data = self.get_data() * (required_max_amplitude / self.max_amplitude)
         data = data.T.astype(format, copy=False)
-        sf.write(file, data, self.rate, format='wav')
+        wavfile.write(file, self.rate, data)  # type: ignore[no-untyped-call]
 
     def get_data(
         self, cue_read: float = 0, duration: float | None = None
@@ -263,7 +263,7 @@ class Track:
         self,
         frequency: float | str,
         duration: float,
-        amplitude: float = 1 / 4,
+        amplitude: float = 1 / 8,
     ) -> Track:
         """Adds a sine wave to the track.
 
