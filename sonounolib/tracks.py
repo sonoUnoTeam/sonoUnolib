@@ -120,9 +120,7 @@ class Track:
             >>> track.play()
         """
         player = get_player()
-        data = self.get_data(cue_read=cue_read, duration=duration)
-        data /= self.max_amplitude
-        return player.play(data, self.rate)
+        return player.play(self, cue_read=cue_read, duration=duration)
 
     @classmethod
     def load(
@@ -147,17 +145,23 @@ class Track:
         self,
         file: str | Path | BinaryIO,
         format: Literal['int16', 'int32', 'float32', 'float64'] = 'int16',
+        cue_read: float = 0,
+        duration: float | None = None,
     ) -> None:
         """Writes the track to a file-like output.
 
         Arguments:
             file: The file to write to.
             format: The data type to use when encoding the track sound waves.
+            cue_read: The starting time for playing the data.
+            duration: The number of seconds to be played.
         """
         if format not in self.VALID_FORMATS:
             raise ValueError(f'Cannot infer a wave format for data type: {format!r}.')
         required_max_amplitude = asmax_amplitude(format)
-        data = self.get_data() * (required_max_amplitude / self.max_amplitude)
+        data = self.get_data(cue_read=cue_read, duration=duration) * (
+            required_max_amplitude / self.max_amplitude
+        )
         data = data.T.astype(format, copy=False)
         wavfile.write(file, self.rate, data)  # type: ignore[no-untyped-call]
 

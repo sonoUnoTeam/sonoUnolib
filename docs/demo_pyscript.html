@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>sonoUno library demonstrator</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <py-env>
+      - numpy
+      - sonounolib
+    </py-env>
+  </head>
+
+  <body>
+    Press Shift-ENTER to evaluate the cell
+    <br>
+    <div>
+      <py-repl id="my-repl">
+import numpy as np
+from sonounolib import Track
+
+frequencies = {octave: 110 * 2**octave for octave in range(0, 8)}
+
+track = Track()
+for octave, frequency in frequencies.items():
+    starting_time = octave
+    duration = len(frequencies) - octave + 1
+    track.set_cue_write(starting_time).add_sine_wave(frequency, duration, amplitude=1/8)
+track.play()
+      </py-repl>
+    </div>
+    Then click on the Play button.
+    <audio controls autoreplay></audio>
+  </body>
+</html>
