@@ -27,9 +27,6 @@ class Track:
             the audio.
         max_amplitude: The maximum value for the sound wave amplitude
         sample_duration: The inverse of the sample rate.
-        duration: The track duration, in seconds.
-        cue_write: The time at which new writings on the track will be started.
-
     """
 
     DEFAULT_TRACK_RATE = 44100

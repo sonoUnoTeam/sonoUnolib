@@ -16,6 +16,10 @@ pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 pytest-mock = "^3.7.0"
 ipython = "^8.3.0"
+mkapi = "^1.0.14"
+mkdocs-material = "^8.2.16"
+markdown-include = "^0.6.0"
+mkdocs-exclude = "^1.0.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

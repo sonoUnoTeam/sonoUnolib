@@ -1,5 +1,5 @@
 The sonoUno library provides generic tools to import audio files, transform the sound waves and export them.
-The most important class is the `Track` class. It stores information intrinsic the sound waves:
+The most important class is the [Track](sonounolib.tracks.Track) class. It stores information intrinsic the sound waves:
 
 - the sampling rate (default: 44100 Hz)
 - the maximum amplitude (default: 1)

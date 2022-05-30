@@ -12,10 +12,11 @@ __all__ = ['asmax_amplitude', 'pad_along_axis']
 def asmax_amplitude(value: str | float) -> float:
     """Returns the maximum amplitude from a data type.
 
-    The maximum amplitude are the following:
-        * `int16`: 32767.
-        * `int32`: 2147483647.
-        * `float`, `float32` or `float64`: 1.
+    Depending on the data type, the values are:
+
+    - `int16`: 32767
+    - `int32`: 2147483647
+    - `float`, `float32` or `float64`: 1
 
     Arguments:
         value: The maximum amplitude or the data type for which the maximum amplitude is

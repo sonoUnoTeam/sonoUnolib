@@ -9,6 +9,7 @@ nav:
 - index.md
 - getting_started.md
 - contributing.md
+- API: mkapi/api/sonounolib
 
 markdown_extensions:
 - pymdownx.highlight:
@@ -24,6 +25,9 @@ markdown_extensions:
 
 plugins:
 - search
+- mkapi:
+    src_dirs:
+    - sonounolib
 - exclude:
     glob:
     - requirements.txt
