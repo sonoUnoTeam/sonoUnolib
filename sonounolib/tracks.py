@@ -5,10 +5,12 @@ using the sonoUno library.
 """
 from __future__ import annotations
 
+from io import BytesIO
 from pathlib import Path
 from typing import Any, BinaryIO, Literal
 
 import numpy as np
+import requests
 from numpy.typing import ArrayLike, NDArray
 
 from .extern import wavfile
@@ -131,6 +133,9 @@ class Track:
            file: The file to read from.
            max_amplitude: The max amplitude of the returned sound waves.
         """
+        if isinstance(file, str):
+            if file.startswith('http://') or file.startswith('https://'):
+                file = BytesIO(requests.get(file).content)
         rate, data = wavfile.read(file)  # type: ignore[no-untyped-call]
         max_amplitude_in = asmax_amplitude(data.dtype.name)
         data = data.T.astype(float) * (max_amplitude / max_amplitude_in)

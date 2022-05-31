@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sonounolib"
-version = "0.5.0"
+version = "0.5.1"
 description = "Library of generic sonification components."
 authors = ["Pierre Chanial <pierre.chanial@apc.in2p3.fr>", "Johanna Casado <johi@gmail.com>"]
 
@@ -9,6 +9,7 @@ python = "^3.8"
 numpy = "^1.22.3"
 sounddevice = "^0.4.4"
 streamunolib = "^0.4.3"
+requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.2.0"
@@ -20,6 +21,7 @@ mkapi = "^1.0.14"
 mkdocs-material = "^8.2.16"
 markdown-include = "^0.6.0"
 mkdocs-exclude = "^1.0.2"
+responses = "^0.21.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -48,9 +50,10 @@ plugins = "numpy.typing.mypy_plugin"
 module = [
     "IPython",
     "IPython.display",
-    "sounddevice",
-    "pyodide",
     "js",
+    "pyodide",
+    "responses",
+    "sounddevice",
 ]
 ignore_missing_imports = true
 

@@ -15,21 +15,21 @@ The sonoUno library can currently be used in three different environments:
 functionality to inject WAVE files as BLOBs (Binary Large OBjects) in the HTML5 audio tag. To experiment with running
 Python (but also many C-compiled libraries, such as Numpy) in a browser and playing sounds, a [demo](demo_pyscript.html) is available.
 
-- In Jupyter notebooks. Here, we rely on the handling of IPython's Audio instance as widgets by Jupyter.
+- In Jupyter notebooks. Here, we rely on the handling of IPython's Audio instances as widgets by Jupyter.
 On linux, this environment can be tried using a dockerized Jupyter notebook.
 
 ```bash
 $ docker run --network host --device /dev/snd --rm pchanial/sonounolib:0.4.0
 ```
-Instructions are then displayed and the Jupyter lab server can be accessed in a browser by copy and pasting a URL of the form: `http://127.0.0.1:8888/lab?token=bc03475af361693e02cfff472ae54cb879be49b2e6d500c6`. To run the demo, select the notebook `demo.ipynb` in the left panel.
+Instructions are then displayed and the Jupyter lab server can be accessed in a browser by copying and pasting a URL of the form: `http://127.0.0.1:8888/lab?token=bc03475af361693e02cfff472ae54cb879be49b2e6d500c6`. To run the demo, select the notebook `demo.ipynb` in the left panel.
 
 Unlike the previous case, the actual Python code is not executed by the browser, but by a Jupyter server, which runs a CPython kernel.
 
-- In all other cases, the cross-platform [PortAudio](http://www.portaudio.com) is used to play sounds. For example, on a debian or ubuntu OS, the package `libportaudio2` needs to be installed:
+- In all other cases, the cross-platform [PortAudio](http://www.portaudio.com) is used to play sounds. For example, on a debian or ubuntu OS, the package `libportaudio2` needs to be installed.
 
 
 ## Reading WAVE files
-Wave files can be imported as a [Track](sonounolib.tracks.Track):
+Wave files (or urls) can be imported as a [Track](sonounolib.tracks.Track):
 
 ```python
 from sonounolib import Track

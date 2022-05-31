@@ -75,6 +75,7 @@ repos:
     - pytest-stub
     - numpy
     - streamunolib
+    - types-requests
     args:
     - --strict
     - --show-error-code

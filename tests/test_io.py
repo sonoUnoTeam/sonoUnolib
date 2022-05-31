@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from numpy.testing import assert_allclose
+from responses import RequestsMock
 
 from sonounolib import Track
 
@@ -37,3 +38,13 @@ def test_write_to_invalid_format() -> None:
     track.add_raw_data([1, -1, 0.5, -0.5])
     with pytest.raises(ValueError, match='Cannot infer a wave format for data type'):
         track.to_wav('track.wav', format='uint8')  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    'url', ['http://unknown/track.wav', 'https://unknown/track.wav']
+)
+def test_load_url(mocked_responses: RequestsMock, url: str) -> None:
+    data = (Path(__file__).parents[1] / 'notebooks/glass-water.wav').read_bytes()
+    mocked_responses.get(url, status=200, body=data)
+    track = Track.load(url)
+    assert_allclose(track.get_data(), Track.load(BytesIO(data)).get_data())
