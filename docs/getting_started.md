@@ -1,11 +1,11 @@
-The sonoUno library provides generic tools to import audio files, transform the sound waves and export them.
-The most important class is the [Track](sonounolib.tracks.Track) class. It stores information intrinsic the sound waves:
+The most important class provided by the sonoUno library is the [Track](sonounolib.tracks.Track) class. It stores information intrinsic the sound waves:
 
 - the sampling rate (default: 44100 Hz)
 - the maximum amplitude (default: 1)
 - the sound wave as a float64 numpy array.
 
 and also a timestamp marker `cue_write` that indicates when will occur the next writing on the track. Tracks manage their own data buffer, which is automatically resized as more sounds are added to it.
+
 
 ## Environments
 
@@ -18,12 +18,13 @@ Python (but also many C-compiled libraries, such as Numpy) in a browser and play
 - In Jupyter notebooks. Here, we rely on the handling of IPython's Audio instances as widgets by Jupyter.
 On linux, this environment can be tried using a dockerized Jupyter notebook.
 
-```bash
-$ docker run --network host --device /dev/snd --rm pchanial/sonounolib:0.4.0
-```
-Instructions are then displayed and the Jupyter lab server can be accessed in a browser by copying and pasting a URL of the form: `http://127.0.0.1:8888/lab?token=bc03475af361693e02cfff472ae54cb879be49b2e6d500c6`. To run the demo, select the notebook `demo.ipynb` in the left panel.
+    ```bash
+    $ docker run --network host --device /dev/snd --rm pchanial/sonounolib:0.4.0
+    ```
 
-Unlike the previous case, the actual Python code is not executed by the browser, but by a Jupyter server, which runs a CPython kernel.
+    Instructions are then displayed and the Jupyter lab server can be accessed in a browser by copying and pasting a URL of the form: `http://127.0.0.1:8888/lab?token=bc03475af361693e02cfff472ae54cb879be49b2e6d500c6`. To run the demo, select the notebook `demo.ipynb` in the left panel.
+
+    Unlike the previous case, the actual Python code is not executed by the browser, but by a Jupyter server, which runs a CPython kernel.
 
 - In all other cases, the cross-platform [PortAudio](http://www.portaudio.com) is used to play sounds. For example, on a debian or ubuntu OS, the package `libportaudio2` needs to be installed.
 
