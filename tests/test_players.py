@@ -1,9 +1,10 @@
+import numpy as np
 import pytest
 from pytest_mock import MockerFixture
 
 import sonounolib
 from sonounolib import Track
-from sonounolib.players import PortAudioPlayer, get_player
+from sonounolib.players import IPythonPlayer, PortAudioPlayer, get_player
 
 
 def test_player_ipython(mocker: MockerFixture) -> None:
@@ -47,3 +48,12 @@ def test_player_no_backend(mocker: MockerFixture) -> None:
     mocker.patch('sonounolib.players.sounddevice', None)
     with pytest.raises(OSError, match='Could not find an appropriate player'):
         get_player()
+
+
+def test_player_ipython_normalization(mocker: MockerFixture) -> None:
+    IPython = pytest.importorskip('IPython')
+    mocker.patch('sonounolib.players.IPython', IPython)
+    track = Track(max_amplitude='int16')
+    track.add_sine_wave(440, 0.01, np.iinfo(np.int16).max)
+    player = IPythonPlayer()
+    player.play(track)

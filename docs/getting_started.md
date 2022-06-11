@@ -52,6 +52,21 @@ track = Track().add_sine_wave(440, duration=2., amplitude=1/4)
 track.play()
 ```
 
+By default, a track's maximum amplitude is 1, but any positive value can be used when
+instantiating the track. Aliases can be used to specified it:
+- `int16`: 32767
+- `int32`: 2147483647
+
+Note that when setting the track's maximum amplitude to a value different from 1,
+the sine wave amplitudes need to be adjusted:
+
+```python
+from sonounolib import Track
+track = Track(max_amplitude='int16').add_sine_wave(440, duration=2., amplitude=32767/4)
+track.play()
+```
+
+
 ## Playing a superposition of sine waves
 
 To superpose other generated sine waves to the track, one has to rewind the cue write at the time when the new sine waves start:

@@ -181,3 +181,18 @@ def test_add_sine_wave() -> None:
     track = Track(rate=4).add_sine_wave(1, 1, 1)
     assert_array_almost_equal(track.get_data(), [0, 1, 0, -1])
     assert_array_almost_equal(track._data, [0, 1, 0, -1])
+
+
+def test_add_sine_wave_max_amplitude() -> None:
+    track = Track(rate=4, max_amplitude=2).add_sine_wave(1, 1, 2)
+    assert_array_almost_equal(track.get_data(), [0, 2, 0, -2])
+
+
+def test_add_sine_wave_negative_amplitude() -> None:
+    with pytest.raises(ValueError, match='is negative'):
+        Track(rate=4).add_sine_wave(1, 1, -1)
+
+
+def test_add_sine_wave_greater_amplitude() -> None:
+    with pytest.raises(ValueError, match='greater than'):
+        Track(rate=4, max_amplitude=2).add_sine_wave(1, 1, 2.1)

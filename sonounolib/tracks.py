@@ -269,14 +269,15 @@ class Track:
         self,
         frequency: float | str,
         duration: float,
-        amplitude: float = 1 / 8,
+        amplitude: float | None = None,
     ) -> Track:
         """Adds a sine wave to the track.
 
         Arguments:
             frequency: Frequency of the sine wave.
             duration: Duration of the sound in seconds.
-            amplitude: The default is 1/4 of the maximum amplitude.
+            amplitude: The amplitude of the sine wave. The default is 1/8 of the track
+                maximum amplitude.
 
         Returns:
             The current track, whose data has been updated with the specified sine
@@ -290,7 +291,15 @@ class Track:
             >>> track.play()
         """
         frequency = asfrequency(frequency)
-        amplitude *= self.max_amplitude
+        if amplitude is None:
+            amplitude = self.max_amplitude / 8
+        if amplitude < 0:
+            raise ValueError(f'The amplitude is negative: {amplitude}')
+        if amplitude > self.max_amplitude:
+            raise ValueError(
+                f'The amplitude is greater than the maximum amplitude: {amplitude} '
+                f'> {self.max_amplitude}'
+            )
         nsample = int(self.rate * duration)
         times = np.linspace(0, nsample * self.sample_duration, nsample, endpoint=False)
         data = amplitude * np.sin(2 * np.pi * frequency * times)
