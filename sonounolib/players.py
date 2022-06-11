@@ -74,9 +74,8 @@ class IPythonPlayer(Player):
         """
         assert IPython is not None
         data = track.get_data(cue_read=cue_read, duration=duration)
-        data /= track.max_amplitude
         audio = IPython.display.Audio(
-            data, rate=track.rate, autoplay=True, normalize=False
+            data / track.max_amplitude, rate=track.rate, autoplay=True, normalize=False
         )
         return audio
 
@@ -145,8 +144,7 @@ class PortAudioPlayer(Player):
         """
         assert sounddevice is not None
         data = track.get_data(cue_read=cue_read, duration=duration)
-        data /= track.max_amplitude
-        sounddevice.play(data, track.rate)
+        sounddevice.play(data / track.max_amplitude, track.rate)
 
 
 def get_player() -> Player:
