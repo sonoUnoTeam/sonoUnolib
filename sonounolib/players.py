@@ -144,7 +144,7 @@ class PortAudioPlayer(Player):
         """
         assert sounddevice is not None
         data = track.get_data(cue_read=cue_read, duration=duration)
-        sounddevice.play(data / track.max_amplitude, track.rate)
+        sounddevice.play(data / track.max_amplitude, track.rate, blocking=True)
 
 
 def get_player() -> Player:
