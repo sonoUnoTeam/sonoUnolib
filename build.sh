@@ -1,3 +1,5 @@
+set -ex
+
 IMAGE_NAME=pchanial/${PWD##*/}
 IMAGE_VERSION=$(poetry version --short)
 

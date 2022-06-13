@@ -125,20 +125,21 @@ class Track:
     def load(
         cls,
         file: str | Path | BinaryIO,
-        max_amplitude: float = 1,
+        max_amplitude: float | str = 1,
     ) -> Track:
         """Reads a wave sound file into a Track.
 
         Arguments:
            file: The file to read from.
-           max_amplitude: The max amplitude of the returned sound waves.
+           max_amplitude: The maximum amplitude of the returned sound waves.
         """
         if isinstance(file, str):
             if file.startswith('http://') or file.startswith('https://'):
                 file = BytesIO(requests.get(file).content)
         rate, data = wavfile.read(file)  # type: ignore[no-untyped-call]
         max_amplitude_in = asmax_amplitude(data.dtype.name)
-        data = data.T.astype(float) * (max_amplitude / max_amplitude_in)
+        max_amplitude_out = asmax_amplitude(max_amplitude)
+        data = data.T.astype(float) * (max_amplitude_out / max_amplitude_in)
         track = Track(rate=rate, max_amplitude=max_amplitude)
         track.add_raw_data(data)
         return track

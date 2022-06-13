@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sonounolib"
-version = "0.5.2"
+version = "0.5.3"
 description = "Library of generic sonification components."
 authors = ["Pierre Chanial <pierre.chanial@apc.in2p3.fr>", "Johanna Casado <johi@gmail.com>"]
 
