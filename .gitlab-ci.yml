@@ -32,7 +32,7 @@ stages:
   coverage: '/TOTAL.*\s(\d+\.\d+\%)/'
   before_script:
   - apt-get update
-  - apt-get install -y libportaudio2 libsndfile1
+  - apt-get install -y libportaudio2
   - pip install poetry
   - poetry --version
   - poetry config virtualenvs.in-project true

@@ -19,7 +19,7 @@ Python (but also many C-compiled libraries, such as Numpy) in a browser and play
 On linux, this environment can be tried using a dockerized Jupyter notebook.
 
     ```bash
-    $ docker run --network host --device /dev/snd --rm pchanial/sonounolib:0.5.2
+    $ docker run --network host --rm pchanial/sonounolib:0.5.2
     ```
 
     Instructions are then displayed and the Jupyter lab server can be accessed in a browser by copying and pasting a URL of the form: `http://127.0.0.1:8888/lab?token=bc03475af361693e02cfff472ae54cb879be49b2e6d500c6`. To run the demo, select the notebook `demo.ipynb` in the left panel.
